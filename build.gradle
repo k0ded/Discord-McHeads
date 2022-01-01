@@ -1,0 +1,39 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+}
+
+group 'com.k0ded'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "net.dv8tion:JDA:5.0.0-alpha.3"
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'ch.qos.logback:logback-classic:1.2.10'
+    implementation 'ch.qos.logback:logback-core:1.2.10'
+    implementation "com.google.code.gson:gson:2.8.9"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+jar {
+    destinationDirectory.set(file("E:\\Bot"))
+}
+
+tasks.withType(ShadowJar) {
+    manifest {
+        attributes["Main-Class"] = "com.k0ded.bot.MainKt"
+    }
+    destinationDirectory.set(file("E:\\Bot"))
+}
+
+test {
+    useJUnitPlatform()
+}
