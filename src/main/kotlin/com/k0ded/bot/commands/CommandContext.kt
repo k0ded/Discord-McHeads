@@ -7,7 +7,6 @@ data class CommandContext(
     val author: User,
     val trigger: String,
     val args: List<String>,
-
     val textChannel: TextChannel
 ) {
 

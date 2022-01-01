@@ -42,6 +42,9 @@ class McAvatar: Command(
         }
     }
 
+    /**
+     * Sends the avatar picture or an error message if something goes sideways
+     */
     private fun sendAvatarMessage(ctx: CommandContext, name: String) {
         ctx.textChannel.sendTyping().queue()
         val msg = getImageFile(name)
@@ -71,6 +74,8 @@ class McAvatar: Command(
         return try {
             val link = URL(avatar + name)
             val conn = link.openConnection() as HttpURLConnection
+
+            // It was returning 403 with the default User-Agent so I had to replace it with a regular browser User-Agent
             conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
             val img: BufferedImage = ImageIO.read(conn.inputStream)
             val file = File("downloaded.png")

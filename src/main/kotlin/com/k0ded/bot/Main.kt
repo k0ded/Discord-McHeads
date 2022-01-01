@@ -7,7 +7,7 @@ val config: Config = FileUtils.loadFile("config.json", Config::class.java)
 
 fun main() {
     val bot = Bot(config)
-    bot.start()
+    bot.run()
 
     // Could do with sharding depending on the estimated size of the bot
 }
